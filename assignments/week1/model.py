@@ -55,8 +55,8 @@ class GradientDescentLinearRegression(LinearRegression):
         # print(y)
         add_one = np.ones((len(X), 1))
         X = np.append(add_one, X, axis=1)
-        
-        if y.ndim>1:
+
+        if y.ndim > 1:
             self.w = np.zeros(shape=(X.shape[1], y.shape[1]))
         else:
             self.w = np.zeros(shape=(X.shape[1],))
