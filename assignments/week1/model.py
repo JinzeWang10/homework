@@ -10,30 +10,29 @@ class LinearRegression:
     b: float
 
     def __init__(self):
-        self.w=np.ndarray(10)
-        self.b=0
+        self.w = np.ndarray(10)
+        self.b = 0
         # raise NotImplementedError()
 
-    def fit(self, X: np.ndarray, y:np.ndarray)->None:
+    def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         """
         update w with closed form solution.
         """
         # print(X.shape)
         # print(y.shape)
-        add_one=np.ones((len(X),1))
+        add_one = np.ones((len(X), 1))
         X = np.append(add_one, X, axis=1)
-        self.w=np.linalg.inv(X.T @ X) @ X.T @ y
+        self.w = np.linalg.inv(X.T @ X) @ X.T @ y
         # raise NotImplementedError()
         return None
 
-    def predict(self, X: np.ndarray)-> np.ndarray:
+    def predict(self, X: np.ndarray) -> np.ndarray:
         """
         predict using updated w
         """
-        add_one=np.ones((len(X),1))
+        add_one = np.ones((len(X), 1))
         X = np.append(add_one, X, axis=1)
         return X @ self.w
-
 
 
 class GradientDescentLinearRegression(LinearRegression):
@@ -48,32 +47,31 @@ class GradientDescentLinearRegression(LinearRegression):
         update w using gradient descent
         """
         # self.w=np.linalg.inv(X) @ y
-        
+
         # print(self.w)
         # print(X)
         # print(y)
         # print(X)
         # print(y)
-        add_one=np.ones((len(X),1))
+        add_one = np.ones((len(X), 1))
         X = np.append(add_one, X, axis=1)
         # print(X)
         try:
-            self.w=np.zeros(shape=(X.shape[1],y.shape[1]))
+            self.w = np.zeros(shape=(X.shape[1], y.shape[1]))
         except:
-            self.w=np.zeros(shape=(X.shape[1],))
+            self.w = np.zeros(shape=(X.shape[1],))
         # print(self.w)
         for i in range(epochs):
-            grad=  X.T @ X @ (self.w) -X.T @ y
-            
+            grad = X.T @ X @ (self.w) - X.T @ y
+
             # print('-------')
             # print(X.T @ X)
             # print('sadsadsa')
             # print(X.T @ y)
             # print("w",self.w)
             # print("grad",grad)
-            self.w-=lr*grad
+            self.w -= lr * grad
             # print(self.w)
-
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         """
@@ -86,8 +84,7 @@ class GradientDescentLinearRegression(LinearRegression):
             np.ndarray: The predicted output.
 
         """
-        add_one=np.ones((len(X),1))
+        add_one = np.ones((len(X), 1))
         X = np.append(add_one, X, axis=1)
         # print(self.w)
         return X @ self.w
-        
