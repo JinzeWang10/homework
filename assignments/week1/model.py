@@ -63,13 +63,6 @@ class GradientDescentLinearRegression(LinearRegression):
         # print(self.w)
         for i in range(epochs):
             grad = X.T @ X @ (self.w) - X.T @ y
-
-            # print('-------')
-            # print(X.T @ X)
-            # print('sadsadsa')
-            # print(X.T @ y)
-            # print("w",self.w)
-            # print("grad",grad)
             self.w -= lr * grad
             # print(self.w)
 
