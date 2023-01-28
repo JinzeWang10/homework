@@ -2,13 +2,11 @@
     "assignment_name": "Assignment 1",
     "contributors": [
         {
-            "name": "Jordan Matelsky",
-            "pennkey": "matelsky"
+            "name": "Jinze Wang",
+            "pennkey": "wangjz"
         }
     ],
     "sources": [
-        "https://example.com",
-        "Conversations with TA (include TA's name)",
-        "LLM (include information about the LLM and how it was used)"
+        "http://vxy10.github.io/2016/06/25/lin-reg-matrix/"
     ]
 }
