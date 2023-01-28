@@ -55,10 +55,10 @@ class GradientDescentLinearRegression(LinearRegression):
         # print(y)
         add_one = np.ones((len(X), 1))
         X = np.append(add_one, X, axis=1)
-        # print(X)
-        try:
+        
+        if y.ndim>1:
             self.w = np.zeros(shape=(X.shape[1], y.shape[1]))
-        except:
+        else:
             self.w = np.zeros(shape=(X.shape[1],))
         # print(self.w)
         for i in range(epochs):
