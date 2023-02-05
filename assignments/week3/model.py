@@ -23,20 +23,19 @@ class MLP(nn.Module):
             initializer: The initializer to use for the weights.
         """
         super(MLP, self).__init__()
-        self.activation=activation
-
+        self.activation = activation
 
         # self.layers=nn.ModuleList()
         # self.layers.append()
-        self.layer1=nn.Linear(input_size,hidden_size)
-        self.layer2=nn.Linear(hidden_size,64)
-        self.layer3=nn.Linear(64,32)
+        self.layer1 = nn.Linear(input_size, hidden_size)
+        self.layer2 = nn.Linear(hidden_size, 64)
+        self.layer3 = nn.Linear(64, 32)
         initializer(self.layer1.weight)
         initializer(self.layer2.weight)
         initializer(self.layer3.weight)
         # self.layers.append()
 
-        self.out=nn.Linear(32,num_classes)
+        self.out = nn.Linear(32, num_classes)
         initializer(self.out.weight)
         # self.layers.append()
 
@@ -53,20 +52,21 @@ class MLP(nn.Module):
 
         # Get activations of each layer
         # print(x)
-        x=self.activation(self.layer1(x))
+        x = self.activation(self.layer1(x))
         # print(x)
-        x=self.activation(self.layer2(x))
-        x=self.activation(self.layer3(x))
+        x = self.activation(self.layer2(x))
+        x = self.activation(self.layer3(x))
         # for layer in self.layers:
         #   x = self.activation(layer(x))
         # Get outputs
-        x = self.out(x) 
+        x = self.out(x)
 
         return x
 
+
 # COnclusion: (1) ones_init always produce best result;
-            # (2) larger hidden dim creates better result
-            # (3) 
+# (2) larger hidden dim creates better result
+# (3)
 
 # MLP(input_dim, 64, output_dim, 1, torch.nn.functional.sigmoid, torch.nn.init.xavier_normal_)
 # Epoch: 9, Accuracy: 0.9678: 100%|██████████| 10/10 [01:40<00:00, 10.08s/it]
@@ -79,7 +79,7 @@ class MLP(nn.Module):
 
 
 # MLP(input_dim, 128, output_dim, 1, torch.nn.functional.sigmoid, torch.nn.init.uniform_)
-# Epoch: 9, Accuracy: 0.1028: 100%|██████████| 10/10 [01:54<00:00, 11.50s/it] 
+# Epoch: 9, Accuracy: 0.1028: 100%|██████████| 10/10 [01:54<00:00, 11.50s/it]
 
 # MLP(input_dim, 128, output_dim, 1, torch.nn.functional.softmax, torch.nn.init.uniform_)
 # Epoch: 9, Accuracy: 0.9437: 100%|██████████| 10/10 [01:58<00:00, 11.89s/it]
