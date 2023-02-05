@@ -16,4 +16,4 @@ def create_model(input_dim: int, output_dim: int) -> MLP:
 
     """
 
-    return MLP(input_dim, 128, output_dim, 1, torch.nn.Sigmoid, torch.nn.init.uniform)
+    return MLP(input_dim, 128, output_dim, 1, torch.nn.functional.relu, torch.nn.init.uniform_)

@@ -3,6 +3,10 @@ from typing import Callable
 
 
 class MLP(nn.Module):
+    """
+    Initialize the MLP.
+    """
+
     def __init__(
         self,
         input_size: int,
@@ -39,7 +43,7 @@ class MLP(nn.Module):
         initializer(self.out.weight)
         # self.layers.append()
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Forward pass of the network.
 
