@@ -17,5 +17,10 @@ def create_model(input_dim: int, output_dim: int) -> MLP:
     """
 
     return MLP(
-        input_dim, 128, output_dim, 1, torch.nn.functional.relu, torch.nn.init.uniform_
+        input_dim,
+        128,
+        output_dim,
+        2,
+        torch.nn.functional.softmax,
+        torch.nn.init.uniform_,
     )

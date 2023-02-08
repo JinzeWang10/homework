@@ -72,6 +72,9 @@ class MLP(nn.Module):
 # (2) larger hidden dim creates better result
 # (3)
 
-# 3 lyaers 128 64 32 0.09
+# 3 lyaers 128 64 32 relu--------0.09
+# 2 layers 128 64 relu ----------
+# 2 layers 128 64 softmax ----------
+
 
 # actv:sigmoid,softmax,glu,rrelu,elu,hardswish,relu,threshold
