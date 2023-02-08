@@ -62,7 +62,7 @@ class MLP(nn.Module):
 
         # Get activations of each layer
         # print(x)
-        # x = self.activation(self.layer1(x))
+        x = self.activation(self.layer1(x))
         # # print(x)
         # x = self.activation(self.layer2(x))
         # x = self.activation(self.layer3(x))
