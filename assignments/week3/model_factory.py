@@ -18,9 +18,9 @@ def create_model(input_dim: int, output_dim: int) -> MLP:
 
     return MLP(
         input_dim,
-        512,
+        128,
         output_dim,
         2,
-        torch.nn.functional.softmax,
+        torch.nn.functional.relu,
         torch.nn.init.xavier_uniform_,
     )
