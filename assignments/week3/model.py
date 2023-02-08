@@ -42,6 +42,9 @@ class MLP(nn.Module):
 
         self.out = nn.Linear(32, num_classes)
         initializer(self.out.weight)
+
+        # self.layer=nn.Linear(input_size,num_classes)
+        # initializer(self.out.weight)
         # self.layers.append()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -63,9 +66,10 @@ class MLP(nn.Module):
         # x = self.activation(self.layer3(x))
 
         # Get outputs
+
         x = self.out(x)
 
-        return x
+        return self.activation(x)
 
 
 # COnclusion: (1) ones_init always produce best result;
