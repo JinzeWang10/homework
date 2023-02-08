@@ -34,14 +34,14 @@ class MLP(nn.Module):
         # self.layers.append()
         self.layer1 = nn.Linear(input_size, hidden_size)
         self.layer2 = nn.Linear(hidden_size, 32)
-        # # self.layer3 = nn.Linear(64, 32)
+        # self.layer3 = nn.Linear(64, 32)
         initializer(self.layer1.weight)
         initializer(self.layer2.weight)
         # # initializer(self.layer3.weight)
         # # self.layers.append()
 
         self.out = nn.Linear(32, num_classes)
-        initializer(self.out.weight)
+        # initializer(self.out.weight)
 
         # self.layer=nn.Linear(input_size,num_classes)
         # initializer(self.out.weight)
@@ -71,7 +71,7 @@ class MLP(nn.Module):
 
         x = self.out(x)
 
-        return self.activation(x)
+        return x
 
 
 # COnclusion: (1) ones_init always produce best result;
