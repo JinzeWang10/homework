@@ -21,6 +21,6 @@ def create_model(input_dim: int, output_dim: int) -> MLP:
         64,
         output_dim,
         2,
-        torch.nn.functional.softmax,
+        torch.nn.functional.relu,
         torch.nn.init.uniform_,
     )
