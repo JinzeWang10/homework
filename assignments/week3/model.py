@@ -32,20 +32,22 @@ class MLP(nn.Module):
 
         # self.layers=nn.ModuleList()
         # self.layers.append()
-        self.layer1 = nn.Linear(input_size, hidden_size)
-        self.layer2 = nn.Linear(hidden_size, 32)
-        # self.layer3 = nn.Linear(64, 32)
-        initializer(self.layer1.weight)
-        initializer(self.layer2.weight)
-        # initializer(self.layer3.weight)
-        # self.layers.append()
+        # self.layer1 = nn.Linear(input_size, hidden_size)
+        # self.layer2 = nn.Linear(hidden_size, 32)
+        # # self.layer3 = nn.Linear(64, 32)
+        # initializer(self.layer1.weight)
+        # initializer(self.layer2.weight)
+        # # initializer(self.layer3.weight)
+        # # self.layers.append()
 
-        self.out = nn.Linear(32, num_classes)
-        initializer(self.out.weight)
+        # self.out = nn.Linear(32, num_classes)
+        # initializer(self.out.weight)
 
         # self.layer=nn.Linear(input_size,num_classes)
         # initializer(self.out.weight)
         # self.layers.append()
+        self.out = nn.Linear(input_size, num_classes)
+        initializer(self.out.weight)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
@@ -60,9 +62,9 @@ class MLP(nn.Module):
 
         # Get activations of each layer
         # print(x)
-        x = self.activation(self.layer1(x))
-        # print(x)
-        x = self.activation(self.layer2(x))
+        # x = self.activation(self.layer1(x))
+        # # print(x)
+        # x = self.activation(self.layer2(x))
         # x = self.activation(self.layer3(x))
 
         # Get outputs
