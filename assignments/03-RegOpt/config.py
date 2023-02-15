@@ -15,7 +15,7 @@ class CONFIG:
         # You can pass arguments to the learning rate scheduler
         # constructor here.
         "step_size": 16,
-        "gamma": 0.995,
+        "gamma": 0.998,
     }
 
     optimizer_factory: Callable[
