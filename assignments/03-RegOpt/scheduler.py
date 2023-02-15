@@ -4,6 +4,11 @@ from torch.optim.lr_scheduler import _LRScheduler
 
 
 class CustomLRScheduler(_LRScheduler):
+    """
+    customize learning rate
+
+    """
+
     def __init__(
         self,
         optimizer: torch.optim.Optimizer,
