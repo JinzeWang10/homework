@@ -14,6 +14,8 @@ class CustomLRScheduler(_LRScheduler):
         optimizer: torch.optim.Optimizer,
         step_size: int,
         gamma: float,
+        eta_min=0,
+        T_max=2,
         last_epoch=-1,
     ) -> None:
         """
@@ -26,6 +28,8 @@ class CustomLRScheduler(_LRScheduler):
         # ... Your Code Here ...
         self.step_size = step_size
         self.gamma = gamma
+        self.eta_min = eta_min
+        self.T_max = T_max
         super(CustomLRScheduler, self).__init__(optimizer, last_epoch)
 
     def get_lr(self) -> List[float]:
@@ -40,5 +44,12 @@ class CustomLRScheduler(_LRScheduler):
         # Here's our dumb baseline implementation:
         if self.last_epoch == 0 or (self.last_epoch % self.step_size) != 0:
             return [group["lr"] for group in self.optimizer.param_groups]
-
-        return [group["lr"] * self.gamma for group in self.optimizer.param_groups]
+        pi = torch.acos(torch.zeros(1)) * 2
+        lr = [
+            self.eta_min
+            + 0.5
+            * abs(group["lr"] - self.eta_min)
+            * (1 + torch.cos(pi * self.last_epoch / self.T_max))
+            for group in self.optimizer.param_groups
+        ]
+        return [i.item() for i in lr]

@@ -16,6 +16,8 @@ class CONFIG:
         # constructor here.
         "step_size": 16,
         "gamma": 0.998,
+        "eta_min": 0,
+        "T_max": 2,
     }
 
     optimizer_factory: Callable[

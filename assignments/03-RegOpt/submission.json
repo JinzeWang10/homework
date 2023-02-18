@@ -4,9 +4,17 @@
         {
             "name": "Jinze Wang",
             "pennkey": "robben"
+        },
+        {
+            "name": "Ziye Liu",
+            "pennkey": "liuziye"
         }
+
     ],
     "sources": [ 
-        "https://pytorch.org/docs/stable/_modules/torch/optim/lr_scheduler.html"
+        "https://pytorch.org/docs/stable/_modules/torch/optim/lr_scheduler.html",
+        "https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate",
+        "https://pytorch.org/docs/stable/generated/torch.optim.lr_scheduler.CosineAnnealingLR.html#torch.optim.lr_scheduler.CosineAnnealingLR"
+    
     ]
 }
