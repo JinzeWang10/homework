@@ -14,7 +14,7 @@ class CONFIG:
     lrs_kwargs = {
         # You can pass arguments to the learning rate scheduler
         # constructor here.
-        "step_size": 16,
+        "step_size": 24,
         "gamma": 0.99,
         "eta_min": 0,
         "T_max": 8,
