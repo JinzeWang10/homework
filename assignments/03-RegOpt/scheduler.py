@@ -46,10 +46,13 @@ class CustomLRScheduler(_LRScheduler):
             return [group["lr"] for group in self.optimizer.param_groups]
         pi = torch.acos(torch.zeros(1)) * 2
         lr = [
-            self.eta_min
-            + 0.5
-            * abs(group["lr"] - self.eta_min)
-            * (1 + torch.cos(pi * self.last_epoch / self.T_max))
+            self.gamma
+            * (
+                self.eta_min
+                + 0.5
+                * abs(group["lr"] - self.eta_min)
+                * (1 + torch.cos(pi * self.last_epoch / self.T_max))
+            )
             for group in self.optimizer.param_groups
         ]
         return [i.item() for i in lr]
