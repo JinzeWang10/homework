@@ -42,17 +42,32 @@ class CustomLRScheduler(_LRScheduler):
 
         # ... Your Code Here ...
         # Here's our dumb baseline implementation:
-        if self.last_epoch == 0 or (self.last_epoch % self.step_size) != 0:
-            return [group["lr"] for group in self.optimizer.param_groups]
-        pi = torch.acos(torch.zeros(1)) * 2
-        lr = [
-            self.gamma
-            * (
-                self.eta_min
-                + 0.5
-                * abs(group["lr"] - self.eta_min)
-                * (1 + torch.cos(pi * self.last_epoch / self.T_max))
-            )
-            for group in self.optimizer.param_groups
-        ]
-        return [i.item() for i in lr]
+        if self.last_epoch / 782 <= 10:
+            if self.last_epoch == 0 or (self.last_epoch % self.step_size) != 0:
+                return [group["lr"] for group in self.optimizer.param_groups]
+            else:
+                pi = torch.acos(torch.zeros(1)) * 2
+                lr = [
+                    self.gamma
+                    * (
+                        self.eta_min
+                        + 0.5
+                        * abs(group["lr"] - self.eta_min)
+                        * (1 + torch.cos(pi * self.last_epoch / self.T_max))
+                    )
+                    for group in self.optimizer.param_groups
+                ]
+                return [i.item() for i in lr]
+        else:
+            pi = torch.acos(torch.zeros(1)) * 2
+            lr = [
+                0.9
+                * (
+                    self.eta_min
+                    + 0.5
+                    * abs(group["lr"] - self.eta_min)
+                    * (1 + torch.cos(pi * self.last_epoch / self.T_max))
+                )
+                for group in self.optimizer.param_groups
+            ]
+            return [i.item() for i in lr]
