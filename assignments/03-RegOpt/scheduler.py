@@ -1,8 +1,6 @@
 from typing import List
 import torch
 from torch.optim.lr_scheduler import _LRScheduler
-import torchvision
-from torchvision.datasets.utils import np
 
 
 class CustomLRScheduler(_LRScheduler):
@@ -30,7 +28,6 @@ class CustomLRScheduler(_LRScheduler):
         # ... Your Code Here ...
         self.step_size = step_size
         self.gamma = gamma
-
         self.eta_min = eta_min
         self.T_max = T_max
         super(CustomLRScheduler, self).__init__(optimizer, last_epoch)
@@ -45,18 +42,17 @@ class CustomLRScheduler(_LRScheduler):
 
         # ... Your Code Here ...
         # Here's our dumb baseline implementation:
-        if self.last_epoch == 0:
-            self.lr_base = [group["lr"] for group in self.optimizer.param_groups]
-        elif self.last_epoch % self.step_size == 0:
-            self.lr_base = [self.gamma * lr for lr in self.lr_base]
-        # pi = torch.acos(torch.zeros(1)) * 2
-        lr_list = [
-            (
+        if self.last_epoch == 0 or (self.last_epoch % self.step_size) != 0:
+            return [group["lr"] for group in self.optimizer.param_groups]
+        pi = torch.acos(torch.zeros(1)) * 2
+        lr = [
+            self.gamma
+            * (
                 self.eta_min
                 + 0.5
-                * abs(lr - self.eta_min)
-                * (1 + np.cos(np.pi * self.last_epoch / self.T_max))
+                * abs(group["lr"] - self.eta_min)
+                * (1 + torch.cos(pi * self.last_epoch / self.T_max))
             )
-            for lr in self.lr_base
+            for group in self.optimizer.param_groups
         ]
-        return lr_list
+        return [i.item() for i in lr]

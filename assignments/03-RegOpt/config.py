@@ -15,7 +15,7 @@ class CONFIG:
         # You can pass arguments to the learning rate scheduler
         # constructor here.
         "step_size": 24,
-        "gamma": 0.99,
+        "gamma": 1.001,
         "eta_min": 0,
         "T_max": 8,
     }
