@@ -44,13 +44,20 @@ class CustomLRScheduler(_LRScheduler):
 
         # ... Your Code Here ...
         # Here's our dumb baseline implementation:
-        if self.last_epoch == 0:
-            self.lr_base = [group["lr"] for group in self.optimizer.param_groups]
-        elif self.last_epoch % self.step_size == 0:
-            self.lr_base = [self.gamma * lr for lr in self.lr_base]
-        # pi = torch.acos(torch.zeros(1)) * 2
-        lr_list = [
-            lr * (1 + np.cos(np.pi * self.last_epoch / self.T_max))
-            for lr in self.lr_base
-        ]
-        return lr_list
+        # print("epoch:{}, avg_lr={}".format(self.last_epoch,self.optimizer.param_groups[0]["lr"]))
+
+        pi=3.1415926
+        if self.last_epoch == 0 or (self.last_epoch % self.step_size) != 0:
+          return [group["lr"] for group in self.optimizer.param_groups]
+
+
+        # if self.last_epoch % 500==0:
+
+        #   print("epoch:{}, avg_lr={}".format(self.last_epoch,np.mean([group["lr"] for group in self.optimizer.param_groups])))
+        # # return [group["lr"] * self.gamma for group in self.optimizer.param_groups] 
+        # # print("epoch:{}, avg_lr={}".format(self.last_epoch,np.mean([group["lr"] for group in self.optimizer.param_groups])))
+        return [(self.eta_min
+            + 0.5
+            * abs(group["lr"] - self.eta_min)
+            * (1 + np.cos(pi * self.last_epoch / self.T_max)))*self.gamma
+            for group in self.optimizer.param_groups]
