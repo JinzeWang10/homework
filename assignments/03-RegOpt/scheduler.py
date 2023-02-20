@@ -18,8 +18,8 @@ class CustomLRScheduler(_LRScheduler):
         eta_min=0,
         T_max=2,
         last_epoch=-1,
-        triangle_len=4000,
-        max_lr=0.03,
+        triangle_len=5000,
+        max_lr=0.05,
     ) -> None:
         """
         Create a new scheduler.
