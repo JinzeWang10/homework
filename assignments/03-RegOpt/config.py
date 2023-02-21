@@ -12,8 +12,7 @@ class CONFIG:
     initial_weight_decay = 0
 
     lrs_kwargs = {
-        # You can pass arguments to the learning rate scheduler
-        # constructor here.
+        # You can pass arguments to the learning rate scheduler constructor here.
         "step_size": 8,
         "triangle_len": 800,
         "max_lr": 0.006,
