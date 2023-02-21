@@ -1,7 +1,6 @@
 from typing import List
 import torch
 from torch.optim.lr_scheduler import _LRScheduler
-from torchvision.datasets.utils import np
 
 
 class CustomLRScheduler(_LRScheduler):
@@ -14,9 +13,6 @@ class CustomLRScheduler(_LRScheduler):
         self,
         optimizer: torch.optim.Optimizer,
         step_size: int,
-        gamma: float,
-        eta_min=0,
-        T_max=2,
         last_epoch=-1,
         triangle_len=4000,
         max_lr=0.02,
@@ -30,12 +26,9 @@ class CustomLRScheduler(_LRScheduler):
         """
         # ... Your Code Here ...
         self.step_size = step_size
-        self.gamma = gamma
-
-        self.eta_min = eta_min
-        self.T_max = T_max
         self.triangle_len = triangle_len
-        self.step_add = max_lr / triangle_len
+        self.step_add = max_lr * self.step_size / (triangle_len)
+        self.step_minus = self.step_add / 2
         super(CustomLRScheduler, self).__init__(optimizer, last_epoch)
 
     def get_lr(self) -> List[float]:
@@ -43,22 +36,23 @@ class CustomLRScheduler(_LRScheduler):
         get learning rate
 
         """
-        # if self.last_epoch % 1000==0:
-
-        #   print("epoch:{}, avg_lr={}".format(self.last_epoch,np.mean([group["lr"] for group in self.optimizer.param_groups])))
-        if self.last_epoch < self.triangle_len:
-            return [
-                group["lr"] + self.step_add for group in self.optimizer.param_groups
-            ]
-        elif (
-            self.last_epoch >= self.triangle_len
-            and self.last_epoch < self.triangle_len * 2
-        ):
-            return [
-                group["lr"] - self.step_add for group in self.optimizer.param_groups
-            ]
+        if self.last_epoch % self.step_size == 0:
+            if self.last_epoch < self.triangle_len:
+                return [
+                    group["lr"] + self.step_add for group in self.optimizer.param_groups
+                ]
+            elif (
+                self.last_epoch >= self.triangle_len
+                and self.last_epoch < self.triangle_len * 3
+            ):
+                return [
+                    group["lr"] - self.step_minus
+                    for group in self.optimizer.param_groups
+                ]
+            else:
+                return [
+                    max(group["lr"] - 0.00001, 0.00001)
+                    for group in self.optimizer.param_groups
+                ]
         else:
-            return [
-                max(group["lr"] - 0.00001, 0.0003)
-                for group in self.optimizer.param_groups
-            ]
+            return [group["lr"] for group in self.optimizer.param_groups]
