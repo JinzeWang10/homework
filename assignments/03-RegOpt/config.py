@@ -14,8 +14,8 @@ class CONFIG:
     lrs_kwargs = {
         # You can pass arguments to the learning rate scheduler constructor here.
         "step_size": 8,
-        "triangle_len": 600,
-        "max_lr": 0.006,
+        "triangle_len": 1200,
+        "max_lr": 0.004,
     }
 
     optimizer_factory: Callable[
