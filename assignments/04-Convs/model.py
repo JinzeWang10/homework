@@ -20,6 +20,8 @@ class Model(torch.nn.Module):
         # self.maxpool1=nn.MaxPool2d(13,1)
         self.fc1 = torch.nn.Linear(400, 128)
         self.fc2 = torch.nn.Linear(128, num_classes)
+        # torch.nn.init.xavier_uniform_(self.fc1.weight)
+        # torch.nn.init.xavier_uniform_(self.fc2.weight)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
