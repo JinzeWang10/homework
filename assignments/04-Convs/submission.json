@@ -2,11 +2,16 @@
     "assignment_name": "Convolutions",
     "contributors": [
         {
-            "name": "Change this to your name",
-            "pennkey": "MyPennKey"
+            "name": "Ziye Liu",
+            "pennkey": "ahoh"
+        },
+        {
+            "name": "Jinze Wang",
+            "pennkey": "robben"
         }
     ],
     "sources": [
-        "Don't forget to list your sources/attribution here!"
+        "https://stackoverflow.com/questions/65160023/any-advice-on-how-to-make-this-cnn-training-faster#:~:text=Try%20to%20add%20one%20or,weights%20when%20flattened%20is%20manageable.&text=Save%20this%20answer.,-Show%20activity%20on",
+        "https://stackoverflow.com/questions/65160023/any-advice-on-how-to-make-this-cnn-training-faster"
     ]
 }
