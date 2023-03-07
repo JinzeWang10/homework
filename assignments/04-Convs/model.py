@@ -11,8 +11,8 @@ class Model(torch.nn.Module):
         init the model
         """
         super(Model, self).__init__()
-        self.conv1 = torch.nn.Conv2d(num_channels, 16, 2, 2)
-        self.conv2 = torch.nn.Conv2d(16, 4, 1, 1)
+        self.conv1 = torch.nn.Conv2d(num_channels, 8, 2, 2)
+        self.conv2 = torch.nn.Conv2d(8, 4, 1, 1)
         self.dropout1 = torch.nn.Dropout(0.1)
         self.dropout2 = torch.nn.Dropout(0.3)
         self.batch_norm1 = torch.nn.BatchNorm2d(num_features=16)
