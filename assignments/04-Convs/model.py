@@ -22,7 +22,6 @@ class Model(torch.nn.Module):
         self.fc2 = torch.nn.Linear(128, num_classes)
         # torch.nn.init.xavier_uniform_(self.fc1.weight)
         # torch.nn.init.xavier_uniform_(self.fc2.weight)
-        
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
