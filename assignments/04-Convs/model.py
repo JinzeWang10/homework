@@ -15,7 +15,7 @@ class Model(torch.nn.Module):
         self.conv2 = torch.nn.Conv2d(8, 4, 1, 1)
         self.dropout1 = torch.nn.Dropout(0.1)
         self.dropout2 = torch.nn.Dropout(0.3)
-        self.batch_norm1 = torch.nn.BatchNorm2d(num_features=16)
+        self.batch_norm1 = torch.nn.BatchNorm2d(num_features=8)
         self.batch_norm2 = torch.nn.BatchNorm2d(num_features=4)
         # self.maxpool1=nn.MaxPool2d(13,1)
         self.fc1 = torch.nn.Linear(256, 128)
