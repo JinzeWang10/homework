@@ -6,8 +6,7 @@ from torchvision.transforms import Compose, ToTensor
 
 
 class CONFIG:
-<<<<<<< HEAD
-    batch_size = 55
+    batch_size = 32
     num_epochs = 4
 
     initial_learning_rate = 0.001
@@ -19,10 +18,6 @@ class CONFIG:
         "triangle_len": 800,
         "max_lr": 0.005,
     }
-=======
-    batch_size = 48
-    num_epochs = 8
->>>>>>> 740ae9e951de7f55f83c82b908d8f95754404a75
 
     optimizer_factory: Callable[
         [nn.Module], torch.optim.Optimizer
