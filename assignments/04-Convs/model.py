@@ -11,14 +11,14 @@ class Model(torch.nn.Module):
         init the model
         """
         super(Model, self).__init__()
-        self.conv1 = torch.nn.Conv2d(num_channels, 16, 3, 3)
+        self.conv1 = torch.nn.Conv2d(num_channels, 32, 2, 2)
         # self.conv2 = torch.nn.Conv2d(16, 4, 1, 1)
         self.dropout1 = torch.nn.Dropout(0.1)
         self.dropout2 = torch.nn.Dropout(0.1)
-        self.batch_norm1 = torch.nn.BatchNorm2d(num_features=16)
+        self.batch_norm1 = torch.nn.BatchNorm2d(num_features=32)
         # self.batch_norm2 = torch.nn.BatchNorm2d(num_features=4)
         # self.maxpool1=nn.MaxPool2d(13,1)
-        self.fc1 = torch.nn.Linear(400, 128)
+        self.fc1 = torch.nn.Linear(800, 128)
         self.fc2 = torch.nn.Linear(128, num_classes)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
