@@ -20,8 +20,6 @@ class Model(torch.nn.Module):
         # self.maxpool1=nn.MaxPool2d(13,1)
         self.fc1 = torch.nn.Linear(800, 256)
         self.fc2 = torch.nn.Linear(256, num_classes)
-        # torch.nn.init.xavier_uniform_(self.fc1.weight)
-        # torch.nn.init.xavier_uniform_(self.fc2.weight)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
@@ -32,9 +30,9 @@ class Model(torch.nn.Module):
         x = self.batch_norm1(x)
         # x = self.conv2(x)
         # x = torch.nn.functional.relu(x)
-        x = self.dropout1(x)
+        # x = self.dropout1(x)
         # x = self.batch_norm2(x)
-        x = torch.nn.functional.avg_pool2d(x, 2)
+        x = torch.nn.functional.avg_pool2d(x, 3)
         x = torch.flatten(x, 1)
         # print(x.shape)
         x = self.dropout2(x)
