@@ -11,7 +11,7 @@ class Model(torch.nn.Module):
         init the model
         """
         super(Model, self).__init__()
-        self.linear_size = 256
+        self.linear_size = 128
         self.conv1 = torch.nn.Conv2d(num_channels, 32, 2, 2)
         # self.conv2 = torch.nn.Conv2d(16, 4, 1, 1)
         self.dropout1 = torch.nn.Dropout(0.1)
