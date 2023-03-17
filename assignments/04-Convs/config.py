@@ -6,10 +6,10 @@ from torchvision.transforms import Compose, ToTensor
 
 
 class CONFIG:
-    batch_size = 64
+    batch_size = 80
     num_epochs = 4
 
-    initial_learning_rate = 0.001
+    initial_learning_rate = 0.0011
     initial_weight_decay = 0
 
     optimizer_factory: Callable[
