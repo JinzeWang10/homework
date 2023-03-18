@@ -41,3 +41,4 @@ class Model(torch.nn.Module):
 
         x = torch.nn.functional.relu(self.fc2(x))
         # print(x.shape)
+        return x
