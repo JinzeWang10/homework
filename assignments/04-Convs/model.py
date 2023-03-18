@@ -18,8 +18,8 @@ class Model(torch.nn.Module):
         self.batch_norm1 = torch.nn.BatchNorm2d(num_features=32)
         # self.batch_norm2 = torch.nn.BatchNorm2d(num_features=8)
 
-        self.fc1 = torch.nn.Linear(3200, 64)
-        self.fc2 = torch.nn.Linear(64, num_classes)
+        self.fc1 = torch.nn.Linear(3200, 48)
+        self.fc2 = torch.nn.Linear(48, num_classes)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
