@@ -15,11 +15,11 @@ total_reward = 0
 last_n_rewards = []
 for _ in range(100000):
     action = agent.act(observation)
-    observation, reward, terminated, truncated, info = env.step(action)
-    agent.learn(observation, reward, terminated, truncated)
+    observation, reward, terminated, _ = env.step(action)
+    agent.learn(observation, reward, terminated)
     total_reward += reward
 
-    if terminated or truncated:
+    if terminated:
         observation, info = env.reset()
         last_n_rewards.append(total_reward)
         n = min(30, len(last_n_rewards))
