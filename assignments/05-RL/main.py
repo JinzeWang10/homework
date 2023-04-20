@@ -22,7 +22,7 @@ for _ in range(100000):
     action = agent.act(observation)
     observation, reward, terminated, truncated, info = env.step(action)
     agent.learn(observation, reward, terminated, truncated)
-    reward=10
+    reward = 10
     total_reward += reward
 
     if terminated or truncated:
