@@ -16,7 +16,7 @@ last_n_rewards = []
 for _ in range(100000):
     action = agent.act(observation)
     observation, reward, terminated, truncated, info = env.step(action)
-    agent.learn(observation, reward, terminated, truncated)
+    # agent.learn(observation, reward, terminated, truncated)/
     total_reward += reward
 
     if terminated or truncated:
