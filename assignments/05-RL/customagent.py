@@ -63,7 +63,7 @@ class Agent:
 
     def act(
         self,
-    ) -> gym.spaces.Discrete:
+    ) -> int:
         """
         Disallow missing docstrings.
 
