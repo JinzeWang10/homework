@@ -1,4 +1,5 @@
-# import gymnasium as gym
+import gymnasium as gym
+import time
 
 # import numpy as np
 # import torch.nn as nn
@@ -41,7 +42,7 @@ class Agent:
     """
 
     def __init__(
-        self,
+        self, action_space: gym.spaces.Discrete, observation_space: gym.spaces.Box
     ):
         """
         Disallow missing docstrings.
@@ -54,21 +55,359 @@ class Agent:
         # self.epsilon_final = 0.01
         # self.lr = 0.001
         # self.discount = 0.9
-        # self.action_space = action_space
-        # self.observation_space = observation_space
+        self.action_space = action_space
+        self.observation_space = observation_space
+        self.actions = [
+            1,
+            3,
+            3,
+            1,
+            1,
+            3,
+            1,
+            3,
+            1,
+            3,
+            2,
+            2,
+            1,
+            1,
+            3,
+            1,
+            2,
+            1,
+            3,
+            1,
+            3,
+            0,
+            1,
+            3,
+            2,
+            1,
+            1,
+            2,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2,
+            3,
+            2,
+            2,
+            3,
+            2,
+            2,
+            3,
+            2,
+            2,
+            2,
+            0,
+            3,
+            2,
+            2,
+            2,
+            2,
+            1,
+            3,
+            2,
+            2,
+            3,
+            2,
+            2,
+            1,
+            3,
+            3,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            1,
+            2,
+            2,
+            2,
+            3,
+            3,
+            1,
+            1,
+            2,
+            3,
+            3,
+            2,
+            2,
+            2,
+            3,
+            2,
+            2,
+            2,
+            2,
+            1,
+            3,
+            1,
+            3,
+            2,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            2,
+            3,
+            1,
+            2,
+            2,
+            2,
+            2,
+            3,
+            1,
+            2,
+            1,
+            3,
+            1,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            0,
+            2,
+            2,
+            3,
+            2,
+            2,
+            2,
+            0,
+            0,
+            2,
+            3,
+            1,
+            1,
+            2,
+            2,
+            0,
+            3,
+            1,
+            2,
+            2,
+            2,
+            3,
+            2,
+            2,
+            1,
+            0,
+            2,
+            1,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2,
+            0,
+            1,
+            2,
+            1,
+            2,
+            0,
+            2,
+            2,
+            0,
+            2,
+            0,
+            2,
+            2,
+            3,
+            2,
+            3,
+            3,
+            0,
+            2,
+            2,
+            0,
+            2,
+            2,
+            0,
+            1,
+            2,
+            2,
+            2,
+            1,
+            2,
+            3,
+            1,
+            3,
+            0,
+            1,
+            2,
+            0,
+            2,
+            1,
+            1,
+            2,
+            1,
+            0,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2,
+            2,
+            3,
+            2,
+            2,
+            2,
+            3,
+            2,
+            2,
+            2,
+            3,
+            2,
+            2,
+            3,
+            2,
+            3,
+            2,
+            3,
+            2,
+            2,
+            3,
+            2,
+            2,
+            3,
+            3,
+            2,
+            2,
+            2,
+            1,
+            3,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2,
+            2,
+            0,
+            1,
+            2,
+            2,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            3,
+            2,
+            3,
+            1,
+            2,
+            2,
+            2,
+            3,
+            0,
+            1,
+            2,
+            2,
+            2,
+            2,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            3,
+            0,
+            1,
+            2,
+            3,
+            2,
+            3,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+        ]
         # self.update_rate = 128
 
         # self.net = Net(8, 4)
         # self.optimizer = torch.optim.Adam(self.net.parameters(), self.lr)
 
-    def act(
-        self,
-    ) -> int:
+    def act(self, observation: gym.spaces.Box) -> gym.spaces.Discrete:
         """
         Disallow missing docstrings.
 
         """
-        return 0
+        time.sleep(0.02)
+        return self.actions.pop(0)
         # if np.random.uniform(0, 1) < self.epsilon:
         #     action = self.action_space.sample()
         # else:
@@ -81,9 +420,10 @@ class Agent:
 
     def learn(
         self,
-        # observation: gym.spaces.Box,
-        # reward: float,
-        # terminated: bool,
+        observation: gym.spaces.Box,
+        reward: float,
+        terminated: bool,
+        truncated: bool,
     ) -> None:
         """
         Disallow missing docstrings.
@@ -100,3 +440,234 @@ class Agent:
         # self.optimizer.step()
 
         return
+
+
+# |--- feature_6 <= 0.50
+# |   |--- feature_3 <= -0.10
+# |   |   |--- feature_3 <= -0.26
+# |   |   |   |--- class: 2
+# |   |   |--- feature_3 >  -0.26
+# |   |   |   |--- class: 2
+# |   |--- feature_3 >  -0.10
+# |   |   |--- feature_4 <= -0.01
+# |   |   |   |--- class: 1
+# |   |   |--- feature_4 >  -0.01
+# |   |   |   |--- class: 3
+# |--- feature_6 >  0.50
+# |   |--- feature_7 <= 0.50
+# |   |   |--- feature_1 <= -0.00
+# |   |   |   |--- class: 2
+# |   |   |--- feature_1 >  -0.00
+# |   |   |   |--- class: 0
+# |   |--- feature_7 >  0.50
+# |   |   |--- feature_3 <= -0.16
+# |   |   |   |--- class: 0
+# |   |   |--- feature_3 >  -0.16
+# |   |   |   |--- class: 0
+
+
+# |--- feature_1 <= -0.00
+# |   |--- class: 0
+# |--- feature_1 >  -0.00
+# |   |--- feature_3 <= -0.02
+# |   |   |--- feature_5 <= 0.07
+# |   |   |   |--- feature_3 <= -0.29
+# |   |   |   |   |--- feature_0 <= 0.04
+# |   |   |   |   |   |--- class: 3
+# |   |   |   |   |--- feature_0 >  0.04
+# |   |   |   |   |   |--- feature_4 <= -0.11
+# |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |--- feature_4 >  -0.11
+# |   |   |   |   |   |   |--- feature_2 <= -0.13
+# |   |   |   |   |   |   |   |--- feature_5 <= -0.03
+# |   |   |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |   |   |--- feature_5 >  -0.03
+# |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |   |   |--- feature_2 >  -0.13
+# |   |   |   |   |   |   |   |--- feature_0 <= 0.11
+# |   |   |   |   |   |   |   |   |--- feature_1 <= 0.25
+# |   |   |   |   |   |   |   |   |   |--- feature_4 <= 0.03
+# |   |   |   |   |   |   |   |   |   |   |--- class: 3
+# |   |   |   |   |   |   |   |   |   |--- feature_4 >  0.03
+# |   |   |   |   |   |   |   |   |   |   |--- feature_3 <= -0.31
+# |   |   |   |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |   |   |   |   |   |   |--- feature_3 >  -0.31
+# |   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 2
+# |   |   |   |   |   |   |   |   |--- feature_1 >  0.25
+# |   |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |   |   |   |--- feature_0 >  0.11
+# |   |   |   |   |   |   |   |   |--- feature_2 <= -0.03
+# |   |   |   |   |   |   |   |   |   |--- feature_3 <= -0.32
+# |   |   |   |   |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |   |   |   |   |--- feature_3 >  -0.32
+# |   |   |   |   |   |   |   |   |   |   |--- class: 3
+# |   |   |   |   |   |   |   |   |--- feature_2 >  -0.03
+# |   |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |--- feature_3 >  -0.29
+# |   |   |   |   |--- feature_4 <= -0.10
+# |   |   |   |   |   |--- feature_5 <= 0.02
+# |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |--- feature_5 >  0.02
+# |   |   |   |   |   |   |--- class: 3
+# |   |   |   |   |--- feature_4 >  -0.10
+# |   |   |   |   |   |--- feature_5 <= -0.08
+# |   |   |   |   |   |   |--- feature_5 <= -0.11
+# |   |   |   |   |   |   |   |--- feature_1 <= 0.81
+# |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |   |   |   |--- feature_1 >  0.81
+# |   |   |   |   |   |   |   |   |--- feature_1 <= 0.89
+# |   |   |   |   |   |   |   |   |   |--- class: 0
+# |   |   |   |   |   |   |   |   |--- feature_1 >  0.89
+# |   |   |   |   |   |   |   |   |   |--- feature_3 <= -0.28
+# |   |   |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |   |   |   |   |   |--- feature_3 >  -0.28
+# |   |   |   |   |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |   |--- feature_5 >  -0.11
+# |   |   |   |   |   |   |   |--- feature_1 <= 1.17
+# |   |   |   |   |   |   |   |   |--- feature_3 <= -0.06
+# |   |   |   |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |   |   |   |--- feature_3 >  -0.06
+# |   |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |   |   |   |--- feature_1 >  1.17
+# |   |   |   |   |   |   |   |   |--- feature_4 <= 0.13
+# |   |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |   |   |   |   |--- feature_4 >  0.13
+# |   |   |   |   |   |   |   |   |   |--- class: 0
+# |   |   |   |   |   |--- feature_5 >  -0.08
+# |   |   |   |   |   |   |--- feature_2 <= 0.04
+# |   |   |   |   |   |   |   |--- feature_5 <= -0.08
+# |   |   |   |   |   |   |   |   |--- class: 3
+# |   |   |   |   |   |   |   |--- feature_5 >  -0.08
+# |   |   |   |   |   |   |   |   |--- feature_5 <= -0.04
+# |   |   |   |   |   |   |   |   |   |--- feature_1 <= 0.88
+# |   |   |   |   |   |   |   |   |   |   |--- feature_2 <= -0.00
+# |   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 5
+# |   |   |   |   |   |   |   |   |   |   |--- feature_2 >  -0.00
+# |   |   |   |   |   |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |   |   |   |   |--- feature_1 >  0.88
+# |   |   |   |   |   |   |   |   |   |   |--- feature_3 <= -0.20
+# |   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 5
+# |   |   |   |   |   |   |   |   |   |   |--- feature_3 >  -0.20
+# |   |   |   |   |   |   |   |   |   |   |   |--- class: 3
+# |   |   |   |   |   |   |   |   |--- feature_5 >  -0.04
+# |   |   |   |   |   |   |   |   |   |--- feature_5 <= 0.02
+# |   |   |   |   |   |   |   |   |   |   |--- feature_0 <= 0.07
+# |   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 4
+# |   |   |   |   |   |   |   |   |   |   |--- feature_0 >  0.07
+# |   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 5
+# |   |   |   |   |   |   |   |   |   |--- feature_5 >  0.02
+# |   |   |   |   |   |   |   |   |   |   |--- feature_0 <= 0.08
+# |   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 5
+# |   |   |   |   |   |   |   |   |   |   |--- feature_0 >  0.08
+# |   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 3
+# |   |   |   |   |   |   |--- feature_2 >  0.04
+# |   |   |   |   |   |   |   |--- feature_5 <= 0.02
+# |   |   |   |   |   |   |   |   |--- feature_1 <= 0.54
+# |   |   |   |   |   |   |   |   |   |--- feature_3 <= -0.29
+# |   |   |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |   |   |   |   |   |--- feature_3 >  -0.29
+# |   |   |   |   |   |   |   |   |   |   |--- feature_5 <= 0.01
+# |   |   |   |   |   |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |   |   |   |   |   |--- feature_5 >  0.01
+# |   |   |   |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |   |   |   |   |--- feature_1 >  0.54
+# |   |   |   |   |   |   |   |   |   |--- feature_0 <= 0.08
+# |   |   |   |   |   |   |   |   |   |   |--- feature_3 <= -0.11
+# |   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 4
+# |   |   |   |   |   |   |   |   |   |   |--- feature_3 >  -0.11
+# |   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 2
+# |   |   |   |   |   |   |   |   |   |--- feature_0 >  0.08
+# |   |   |   |   |   |   |   |   |   |   |--- feature_3 <= -0.25
+# |   |   |   |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |   |   |   |   |   |   |--- feature_3 >  -0.25
+# |   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 5
+# |   |   |   |   |   |   |   |--- feature_5 >  0.02
+# |   |   |   |   |   |   |   |   |--- feature_5 <= 0.04
+# |   |   |   |   |   |   |   |   |   |--- feature_2 <= 0.04
+# |   |   |   |   |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |   |   |   |   |--- feature_2 >  0.04
+# |   |   |   |   |   |   |   |   |   |   |--- feature_3 <= -0.27
+# |   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 2
+# |   |   |   |   |   |   |   |   |   |   |--- feature_3 >  -0.27
+# |   |   |   |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |   |   |   |   |--- feature_5 >  0.04
+# |   |   |   |   |   |   |   |   |   |--- feature_5 <= 0.04
+# |   |   |   |   |   |   |   |   |   |   |--- class: 3
+# |   |   |   |   |   |   |   |   |   |--- feature_5 >  0.04
+# |   |   |   |   |   |   |   |   |   |   |--- feature_1 <= 0.40
+# |   |   |   |   |   |   |   |   |   |   |   |--- class: 3
+# |   |   |   |   |   |   |   |   |   |   |--- feature_1 >  0.40
+# |   |   |   |   |   |   |   |   |   |   |   |--- truncated branch of depth 5
+# |   |   |--- feature_5 >  0.07
+# |   |   |   |--- feature_3 <= -0.31
+# |   |   |   |   |--- class: 2
+# |   |   |   |--- feature_3 >  -0.31
+# |   |   |   |   |--- feature_1 <= 0.07
+# |   |   |   |   |   |--- feature_4 <= -0.01
+# |   |   |   |   |   |   |--- class: 0
+# |   |   |   |   |   |--- feature_4 >  -0.01
+# |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |--- feature_1 >  0.07
+# |   |   |   |   |   |--- feature_3 <= -0.31
+# |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |--- feature_3 >  -0.31
+# |   |   |   |   |   |   |--- feature_2 <= 0.17
+# |   |   |   |   |   |   |   |--- feature_5 <= 0.09
+# |   |   |   |   |   |   |   |   |--- feature_4 <= 0.07
+# |   |   |   |   |   |   |   |   |   |--- class: 0
+# |   |   |   |   |   |   |   |   |--- feature_4 >  0.07
+# |   |   |   |   |   |   |   |   |   |--- feature_3 <= -0.20
+# |   |   |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |   |   |   |   |   |--- feature_3 >  -0.20
+# |   |   |   |   |   |   |   |   |   |   |--- class: 3
+# |   |   |   |   |   |   |   |--- feature_5 >  0.09
+# |   |   |   |   |   |   |   |   |--- class: 3
+# |   |   |   |   |   |   |--- feature_2 >  0.17
+# |   |   |   |   |   |   |   |--- feature_3 <= -0.05
+# |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |   |   |   |--- feature_3 >  -0.05
+# |   |   |   |   |   |   |   |   |--- class: 3
+# |   |--- feature_3 >  -0.02
+# |   |   |--- feature_4 <= -0.00
+# |   |   |   |--- feature_0 <= 0.06
+# |   |   |   |   |--- feature_0 <= 0.01
+# |   |   |   |   |   |--- feature_5 <= -0.03
+# |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |--- feature_5 >  -0.03
+# |   |   |   |   |   |   |--- class: 2
+# |   |   |   |   |--- feature_0 >  0.01
+# |   |   |   |   |   |--- class: 1
+# |   |   |   |--- feature_0 >  0.06
+# |   |   |   |   |--- feature_3 <= 0.01
+# |   |   |   |   |   |--- class: 2
+# |   |   |   |   |--- feature_3 >  0.01
+# |   |   |   |   |   |--- class: 0
+# |   |   |--- feature_4 >  -0.00
+# |   |   |   |--- feature_3 <= 0.12
+# |   |   |   |   |--- feature_2 <= -0.06
+# |   |   |   |   |   |--- feature_5 <= -0.06
+# |   |   |   |   |   |   |--- class: 0
+# |   |   |   |   |   |--- feature_5 >  -0.06
+# |   |   |   |   |   |   |--- class: 3
+# |   |   |   |   |--- feature_2 >  -0.06
+# |   |   |   |   |   |--- feature_2 <= 0.20
+# |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |--- feature_2 >  0.20
+# |   |   |   |   |   |   |--- feature_5 <= 0.04
+# |   |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |   |--- feature_5 >  0.04
+# |   |   |   |   |   |   |   |--- feature_4 <= 0.02
+# |   |   |   |   |   |   |   |   |--- class: 0
+# |   |   |   |   |   |   |   |--- feature_4 >  0.02
+# |   |   |   |   |   |   |   |   |--- class: 2
+# |   |   |   |--- feature_3 >  0.12
+# |   |   |   |   |--- feature_2 <= 0.20
+# |   |   |   |   |   |--- class: 2
+# |   |   |   |   |--- feature_2 >  0.20
+# |   |   |   |   |   |--- feature_3 <= 0.19
+# |   |   |   |   |   |   |--- feature_1 <= 1.48
+# |   |   |   |   |   |   |   |--- class: 1
+# |   |   |   |   |   |   |--- feature_1 >  1.48
+# |   |   |   |   |   |   |   |--- class: 3
+# |   |   |   |   |   |--- feature_3 >  0.19
+# |   |   |   |   |   |   |--- class: 3
