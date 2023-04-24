@@ -407,7 +407,11 @@ class Agent:
 
         """
         time.sleep(0.02)
-        return self.actions.pop(0)
+        try:
+            action = self.actions.pop(0)
+        except:
+            action = 0
+        return action
         # if np.random.uniform(0, 1) < self.epsilon:
         #     action = self.action_space.sample()
         # else:
