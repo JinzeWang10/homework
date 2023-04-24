@@ -55,7 +55,6 @@ class Agent:
         # self.epsilon_decay = 0.001
         # self.epsilon_final = 0.01
         # self.lr = 0.001
-        # self.discount = 0.9
         self.action_space = action_space
         self.observation_space = observation_space
         self.actions = [
