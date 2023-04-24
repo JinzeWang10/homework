@@ -1,4 +1,4 @@
-import gymnasium as gym
+# import gymnasium as gym
 
 # import numpy as np
 # import torch.nn as nn
@@ -41,7 +41,7 @@ class Agent:
     """
 
     def __init__(
-        self, action_space: gym.spaces.Discrete, observation_space: gym.spaces.Box
+        self,
     ):
         """
         Disallow missing docstrings.
@@ -61,7 +61,9 @@ class Agent:
         # self.net = Net(8, 4)
         # self.optimizer = torch.optim.Adam(self.net.parameters(), self.lr)
 
-    def act(self, observation: gym.spaces.Box) -> gym.spaces.Discrete:
+    def act(
+        self,
+    ) -> gym.spaces.Discrete:
         """
         Disallow missing docstrings.
 
@@ -79,9 +81,9 @@ class Agent:
 
     def learn(
         self,
-        observation: gym.spaces.Box,
-        reward: float,
-        terminated: bool,
+        # observation: gym.spaces.Box,
+        # reward: float,
+        # terminated: bool,
     ) -> None:
         """
         Disallow missing docstrings.
