@@ -406,10 +406,10 @@ class Agent:
         Disallow missing docstrings.
 
         """
-        time.sleep(0.02)
-        try:
+        # time.sleep(0.02)
+        if len(self.actions) > 0:
             action = self.actions.pop(0)
-        except:
+        else:
             action = 0
         return action
         # if np.random.uniform(0, 1) < self.epsilon:
